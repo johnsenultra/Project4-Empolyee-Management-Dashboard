@@ -8,12 +8,11 @@ import { useEffect, useState } from 'react';
 import firebaseApp from './firebaseConfig';
 import { getFirestore, collection, onSnapshot, setDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
-
 const defaultTheme = createTheme();
 
 export default function AddEmployee() {
 
-  const [employee, setEmploye] = useState({
+  const [employee, setEmployee] = useState({
     firstname: "",
     lastname: "",
     email: "",
@@ -24,9 +23,8 @@ export default function AddEmployee() {
     hiredate: ""
   });
 
-  const [employeeList, setEmployeList] = useState([]);
+  const [employeeList, setEmployeeList] = useState([]);
   
-
 
   useEffect(() => {
     // Initialize Cloud Firestore and get a reference to the service
@@ -42,7 +40,7 @@ export default function AddEmployee() {
           tempEmployee["employee_id"] = employee.id
           newEmployeeList.push(tempEmployee);
         });
-        setEmployeList(newEmployeeList);
+        setEmployeeList(newEmployeeList);
       });
       
     } catch (e) {
@@ -50,14 +48,16 @@ export default function AddEmployee() {
     }
   }, [])
 
+  // Add new employed employee
   const addEmployee = async () => {
     // Initialize Cloud Firestore and get reference to the service
     const db = getFirestore(firebaseApp);
 
-    if (employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.address === '' || employee.address === '' || employee.contact === '' ||
+    if (employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.address === '' || employee.address === '' || employee.gender === '' || employee.contact === '' ||
       employee.jobtitle === '' || employee.hiredate === '') {
       alert('Some input field are empty')
     } else {
+
       // Generate a new employee ID based on the current year and a sequential number
       const currentYear = new Date().getFullYear();
       const sequentialNumber = employeeList.length + 1;
@@ -68,13 +68,25 @@ export default function AddEmployee() {
         employee_id: employeeID,
       };
       
-      setEmployeList([...employeeList, newEmployee])
+      setEmployeeList([...employeeList, newEmployee])
 
       try {
         await setDoc(doc(db, "employees", employeeID), newEmployee)
-      } catch {
-
+      } catch (error) {
+        console.error('Error adding document: ', error)
       }
+
+      setEmployee({
+        firstname: "",
+        lastname: "",
+        email: "",
+        address: "",
+        gender: "",
+        contact: "",
+        jobtitle: "",
+        hiredate: ""
+
+      });
     } 
   };
 
@@ -93,7 +105,7 @@ export default function AddEmployee() {
         <h2 className='fw-bold'>Add Employee</h2>
          
         {/* Input field */}
-        <div className="row ">
+        <div className="row ">S
           <div className="col md-6">
               <TextField
               margin="normal"
@@ -103,7 +115,12 @@ export default function AddEmployee() {
               id="firstname"
               label="First Name"
               name="firstname"
-              variant='filled'
+              variant='outlined'
+              onChange={(e) => setEmployee({
+                ...employee,
+                firstname: e.target.value
+              })}
+              value={employee.firstname}
               />
           </div>
 
@@ -116,7 +133,12 @@ export default function AddEmployee() {
               id="lastname"
               label="Last Name"
               name="=lastname"
-              variant='filled'
+              variant='outlined'
+              onChange={(e) => setEmployee({
+                ...employee,
+                lastname: e.target.value
+              })}
+              value={employee.lastname}
               />
           </div>
         </div>
@@ -131,7 +153,12 @@ export default function AddEmployee() {
               label="Email"
               name="email"
               type='email'
-              variant='filled'
+              variant='outlined'
+              onChange={(e) => setEmployee({
+                ...employee,
+                email: e.target.value
+              })}
+              value={employee.email}
             />
             <TextField
               margin="normal"
@@ -142,7 +169,12 @@ export default function AddEmployee() {
               label="Address"
               type="text"
               id="address"
-              variant='filled'
+              variant='outlined'
+              onChange={(e) => setEmployee({
+                ...employee,
+                address: e.target.value
+              })}
+              value={employee.address}
             />
 
           <div className="row ">
@@ -156,7 +188,12 @@ export default function AddEmployee() {
                 label="Gender"
                 type="text"
                 id="gender"
-                variant='filled'
+                variant='outlined'
+                onChange={(e) => setEmployee({
+                  ...employee,
+                  gender: e.target.value
+                })}
+                value={employee.gender}
               />
             </div>
 
@@ -170,7 +207,12 @@ export default function AddEmployee() {
                 label="Contact"
                 type="text"
                 id="contact"
-                variant='filled'
+                variant='outlined'
+                onChange={(e) => setEmployee({
+                  ...employee,
+                  contact: e.target.value
+                })}
+                value={employee.contact}
               />
             </div>
           </div>
@@ -179,11 +221,16 @@ export default function AddEmployee() {
             size='small'
             required
             fullWidth
-            name="position"
+            name="jobtitle"
             label="Job Title"
             type="text"
-            id="position"
-            variant='filled'
+            id="jobtitle"
+            variant='outlined'
+            onChange={(e) => setEmployee({
+              ...employee,
+              jobtitle: e.target.value
+            })}
+            value={employee.jobtitle}
           />
           <TextField
             margin="normal"
@@ -194,21 +241,26 @@ export default function AddEmployee() {
             label="Hire Date"
             type="date"
             id="hiredate"
-            variant='filled'
+            variant='outlined'
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={(e) => setEmployee({
+              ...employee,
+              hiredate: e.target.value
+            })}
+            value={employee.hiredate}
           />
           
-            <Button type="submit" fullWidth variant="contained" 
-            sx={{ 
-              mt: 3,
-              background: 'black',
-              fontWeight: 'bold',
-              ":hover": {
-                background: 'purple'
-              }
-            }}>
+            <Button fullWidth variant="contained" onClick={() => addEmployee() } 
+              sx={{ 
+                mt: 3,
+                background: 'black',
+                fontWeight: 'bold',
+                ":hover": {
+                  background: 'purple'
+                }
+              }}>
               Add Employee
             </Button>
             

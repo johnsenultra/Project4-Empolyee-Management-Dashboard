@@ -2,17 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import firebaseApp from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import AddEmployee from './AddEmployee';
-import Button from '@mui/material/Button';
-
 
 function Dashboard() {
 
-   const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
+   // const [addEmployeeVisible, setAddEmployeeVisible] = useState(false);
 
-   const handleAddEmployeeClick = () => {
-      setAddEmployeeVisible(true);
-   }
+   // const handleAddEmployeeClick = () => {
+   //    setAddEmployeeVisible(true);
+   // }
 
    const [employeeList, setEmployeList] = useState([]);
 
@@ -35,52 +32,67 @@ function Dashboard() {
       }
    }, [])
 
+   const deleteEmployee = (employeeID, firstname, lastname,) => {
 
+      // Initialize Cloud Firestore and get a reference to the service
+      const db = getFirestore(firebaseApp);
+
+      let userConfirmed = window.confirm(`Are you sure you want to delete ${firstname} ${lastname}?`);
+
+      if(userConfirmed) {
+         //If confirmed, delete document
+         deleteDoc(doc(db, 'employees', employeeID))
+         .then(() => {
+            //Additional logic after deletion if needed
+         })
+         .catch((error) => {
+            console.error('Error deleting document: ', error);
+         });
+      } else {
+         console.log('Deletion canceled by user');
+      }
+   };
 
    return (
       <section className="container-fluid">
-         {addEmployeeVisible ? (
-            <AddEmployee onclose={() => setAddEmployeeVisible(false)} />
-         ) : (
-            <>
-               <h1 className="fw-bold">Employee Records</h1>
-               <p>This is a list of employee records</p>
-               <Button variant='contained' className='fw-bold' onClick={handleAddEmployeeClick}>Add New Employee</Button>
+         <h1 className="fw-bold">Employee Records</h1>
+         <p>This is a list of employee records</p>
 
-               <table className="table table-striped">
-                  <thead>
-                     <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Job Title</th>
-                        <th>Action</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {employeeList.map((employeeRecord) => (
-                         <tr className='border' key={employeeRecord.id}>
-                         <td>{employeeRecord.employee_id}</td>
-                         <td>{employeeRecord.firstname}</td>
-                         <td>{employeeRecord.lastname}</td>
-                         <td>{employeeRecord.email}</td>
-                         <td>{employeeRecord.jobtitle}</td>
-                         
-                         <td>
-                            <small>
-                               <button className="btn btn-secondary btn-sm">📝</button>
-                               <button className="btn btn-danger btn-sm">🗑️</button>
-                            </small>
-                         </td>
-                      </tr>
-                     ))}
-                    
-                  </tbody>
-               </table>
-            </>
-         )}
-         
+         <table className="table table-striped">
+            <thead>
+               <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Job Title</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+               {employeeList.map((employeeRecord) => (
+                  <tr className='border' key={employeeRecord.id}>
+                     <td>{employeeRecord.employee_id}</td>
+                     <td>{employeeRecord.firstname}</td>
+                     <td>{employeeRecord.lastname}</td>
+                     <td>{employeeRecord.email}</td>
+                     <td>{employeeRecord.jobtitle}</td>
+                     
+                     <td>
+                        <small>
+                           <button className="btn btn-secondary btn-sm">📝</button>
+                           <button onClick={() => 
+                              deleteEmployee(employeeRecord.employee_id, employeeRecord.firstname, employeeRecord.lastname, employeeRecord.email,
+                              employeeRecord.address, employeeRecord.gender, employeeRecord.contact, employeeRecord.jobtitle, employeeRecord.hiredate)
+                           } className="btn btn-danger btn-sm">🗑️</button>
+                        </small>
+                     </td>
+                  </tr>
+               ))}
+               
+            </tbody>
+         </table>
+   
       </section>
    )
 }
