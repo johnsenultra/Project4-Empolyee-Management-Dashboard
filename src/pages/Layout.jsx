@@ -30,7 +30,7 @@ function Layout() {
                </div>
             </div>
          </nav>
-         <div className="container mt-5">
+         <div className="container-fluid mt-5">
             <Outlet />
          </div>
          <footer className="bg-dark pt-2 text-center text-white fixed-bottom mt-auto">

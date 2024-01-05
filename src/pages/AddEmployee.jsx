@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import firebaseApp from './firebaseConfig';
-import { getFirestore, collection, onSnapshot, setDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, setDoc, deleteDoc, doc, updateDoc, addDoc } from "firebase/firestore";
 
 const defaultTheme = createTheme();
 
@@ -57,24 +57,13 @@ export default function AddEmployee() {
       employee.jobtitle === '' || employee.hiredate === '') {
       alert('Some input field are empty')
     } else {
+      setEmployeeList(
+        employeeList => [
+            ...employeeList, employee
+        ]
+      );
 
-      // Generate a new employee ID based on the current year and a sequential number
-      const currentYear = new Date().getFullYear();
-      const sequentialNumber = employeeList.length + 1;
-      const employeeID = `${currentYear.toString().slice(-2)}${sequentialNumber.toString().padStart(4, '0')}`;
-      
-      const newEmployee = {
-        ...employee,
-        employee_id: employeeID,
-      };
-      
-      setEmployeeList([...employeeList, newEmployee])
-
-      try {
-        await setDoc(doc(db, "employees", employeeID), newEmployee)
-      } catch (error) {
-        console.error('Error adding document: ', error)
-      }
+      addDoc(collection(db, 'employees'), employee);
 
       setEmployee({
         firstname: "",
@@ -85,9 +74,40 @@ export default function AddEmployee() {
         contact: "",
         jobtitle: "",
         hiredate: ""
-
       });
-    } 
+    }
+      
+
+    //   // Generate a new employee ID based on the current year and a sequential number
+    //   const currentYear = new Date().getFullYear();
+    //   const sequentialNumber = employeeList.length + 1;
+    //   const employeeID = `${currentYear.toString().slice(-2)}${sequentialNumber.toString().padStart(4, '0')}`;
+      
+    //   const newEmployee = {
+    //     ...employee,
+    //     employee_id: employeeID,
+    //   };
+      
+    //   setEmployeeList([...employeeList, newEmployee])
+
+    //   try {
+    //     await setDoc(doc(db, "employees", employeeID), newEmployee)
+    //   } catch (error) {
+    //     console.error('Error adding document: ', error)
+    //   }
+
+    //   setEmployee({
+    //     firstname: "",
+    //     lastname: "",
+    //     email: "",
+    //     address: "",
+    //     gender: "",
+    //     contact: "",
+    //     jobtitle: "",
+    //     hiredate: ""
+
+    //   });
+    // } 
   };
 
   return (
@@ -105,7 +125,7 @@ export default function AddEmployee() {
         <h2 className='fw-bold'>Add Employee</h2>
          
         {/* Input field */}
-        <div className="row ">S
+        <div className="row ">
           <div className="col md-6">
               <TextField
               margin="normal"

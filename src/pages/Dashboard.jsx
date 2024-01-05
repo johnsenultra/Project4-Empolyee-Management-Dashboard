@@ -2,6 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import firebaseApp from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Visibility from '@mui/icons-material/VisibilityRounded';
+import DeleteIcon from '@mui/icons-material/DeleteSharp';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 function Dashboard() {
 
@@ -61,7 +65,6 @@ function Dashboard() {
          <table className="table table-striped">
             <thead>
                <tr>
-                  <th>ID</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Email</th>
@@ -72,20 +75,24 @@ function Dashboard() {
             <tbody>
                {employeeList.map((employeeRecord) => (
                   <tr className='border' key={employeeRecord.id}>
-                     <td>{employeeRecord.employee_id}</td>
                      <td>{employeeRecord.firstname}</td>
                      <td>{employeeRecord.lastname}</td>
                      <td>{employeeRecord.email}</td>
                      <td>{employeeRecord.jobtitle}</td>
-                     
                      <td>
-                        <small>
-                           <button className="btn btn-secondary btn-sm">📝</button>
-                           <button onClick={() => 
+                        <Tooltip title='View' placement='left'>
+                           <IconButton className="btn btn-secondary btn-sm">
+                              <Visibility color='info'/>
+                           </IconButton>
+                        </Tooltip>
+                        <Tooltip title='Delete' placement='right'>
+                           <IconButton onClick={() => 
                               deleteEmployee(employeeRecord.employee_id, employeeRecord.firstname, employeeRecord.lastname, employeeRecord.email,
                               employeeRecord.address, employeeRecord.gender, employeeRecord.contact, employeeRecord.jobtitle, employeeRecord.hiredate)
-                           } className="btn btn-danger btn-sm">🗑️</button>
-                        </small>
+                           }  className="btn btn-danger btn-sm">
+                              <DeleteIcon color='warning'/>
+                           </IconButton>
+                        </Tooltip>
                      </td>
                   </tr>
                ))}
