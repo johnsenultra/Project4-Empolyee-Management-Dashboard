@@ -84,12 +84,12 @@ export default function SignIn() {
             />
             <Button type="submit" fullWidth variant="contained" 
               sx={{ 
-                  mt: 3,
-                  background: 'black',
-                  fontWeight: 'bold',
-                  ":hover": {
-                    background: 'purple'
-                  }
+                mt: 3,
+                background: 'black',
+                fontWeight: 'bold',
+                ":hover": {
+                  background: 'purple'
+                }
               }}>
               Sign In
             </Button>
