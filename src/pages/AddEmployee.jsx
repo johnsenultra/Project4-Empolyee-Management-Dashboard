@@ -120,13 +120,13 @@ export default function AddEmployee() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
-        <h2 className='fw-bold'>Add Employee</h2>
-         
-        {/* Input field */}
-        <div className="row ">
-          <div className="col md-6">
+            }}
+          >
+          <h2 className='fw-bold'>Add Employee</h2>
+          
+          {/* Input field */}
+          <div className="row ">
+            <div className="col md-6">
               <TextField
               margin="normal"
               size='small'
@@ -142,26 +142,26 @@ export default function AddEmployee() {
               })}
               value={employee.firstname}
               />
-          </div>
+            </div>
 
-          <div className="col md-6">
-            <TextField
-              margin="normal"
-              size='small'
-              required
-              fullWidth
-              id="lastname"
-              label="Last Name"
-              name="=lastname"
-              variant='outlined'
-              onChange={(e) => setEmployee({
-                ...employee,
-                lastname: e.target.value
-              })}
-              value={employee.lastname}
-              />
+            <div className="col md-6">
+              <TextField
+                margin="normal"
+                size='small'
+                required
+                fullWidth
+                id="lastname"
+                label="Last Name"
+                name="=lastname"
+                variant='outlined'
+                onChange={(e) => setEmployee({
+                  ...employee,
+                  lastname: e.target.value
+                })}
+                value={employee.lastname}
+                />
+            </div>
           </div>
-        </div>
 
          <Box component="form"  noValidate sx={{ mt: 0 }}>
             <TextField
@@ -197,80 +197,81 @@ export default function AddEmployee() {
               value={employee.address}
             />
 
-          <div className="row ">
-            <div className="col md-6">
-              <TextField
-                margin="normal"
-                size='small'
-                required
-                fullWidth
-                name="gender"
-                label="Gender"
-                type="text"
-                id="gender"
-                variant='outlined'
-                onChange={(e) => setEmployee({
-                  ...employee,
-                  gender: e.target.value
-                })}
-                value={employee.gender}
-              />
-            </div>
+            <div className="row ">
+              <div className="col md-6">
+                <TextField
+                  margin="normal"
+                  size='small'
+                  required
+                  fullWidth
+                  name="gender"
+                  label="Gender"
+                  type="text"
+                  id="gender"
+                  variant='outlined'
+                  onChange={(e) => setEmployee({
+                    ...employee,
+                    gender: e.target.value
+                  })}
+                  value={employee.gender}
+                />
+              </div>
 
-            <div className="col md-6">
-              <TextField
-                margin="normal"
-                size='small'
-                required
-                fullWidth
-                name="contact"
-                label="Contact"
-                type="text"
-                id="contact"
-                variant='outlined'
-                onChange={(e) => setEmployee({
-                  ...employee,
-                  contact: e.target.value
-                })}
-                value={employee.contact}
-              />
+              <div className="col md-6">
+                <TextField
+                  margin="normal"
+                  size='small'
+                  required
+                  fullWidth
+                  name="contact"
+                  label="Contact"
+                  type="text"
+                  id="contact"
+                  variant='outlined'
+                  onChange={(e) => setEmployee({
+                    ...employee,
+                    contact: e.target.value
+                  })}
+                  value={employee.contact}
+                />
+              </div>
             </div>
-          </div>
-          <TextField
-            margin="normal"
-            size='small'
-            required
-            fullWidth
-            name="jobtitle"
-            label="Job Title"
-            type="text"
-            id="jobtitle"
-            variant='outlined'
-            onChange={(e) => setEmployee({
-              ...employee,
-              jobtitle: e.target.value
-            })}
-            value={employee.jobtitle}
-          />
-          <TextField
-            margin="normal"
-            size='small'
-            required
-            fullWidth
-            name="hiredate"
-            label="Hire Date"
-            type="date"
-            id="hiredate"
-            variant='outlined'
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => setEmployee({
-              ...employee,
-              hiredate: e.target.value
-            })}
-            value={employee.hiredate}
-          />
+            
+            <TextField
+              margin="normal"
+              size='small'
+              required
+              fullWidth
+              name="jobtitle"
+              label="Job Title"
+              type="text"
+              id="jobtitle"
+              variant='outlined'
+              onChange={(e) => setEmployee({
+                ...employee,
+                jobtitle: e.target.value
+              })}
+              value={employee.jobtitle}
+            />
+            <TextField
+              margin="normal"
+              size='small'
+              required
+              fullWidth
+              name="hiredate"
+              label="Hire Date"
+              type="date"
+              id="hiredate"
+              variant='outlined'
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(e) => setEmployee({
+                ...employee,
+                hiredate: e.target.value
+              })}
+              value={employee.hiredate}
+            />
           
             <Button fullWidth variant="contained" onClick={() => addEmployee() } 
               sx={{ 
@@ -283,8 +284,7 @@ export default function AddEmployee() {
               }}>
               Add Employee
             </Button>
-            
-         </Box>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>
