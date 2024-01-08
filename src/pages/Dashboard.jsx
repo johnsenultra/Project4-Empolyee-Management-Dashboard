@@ -86,10 +86,10 @@ function Dashboard() {
             
          } else {
             console.error('Employee not found');
-         };
+         }
       } catch (error) {
          console.error('Error fetching employee data: ', error);
-      };
+      }
    };
 
    const handleClose = () => setOpen(false);
