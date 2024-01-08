@@ -1,4 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Tooltip from '@mui/material/Tooltip';
 
 function Layout() {
    
@@ -6,27 +11,29 @@ function Layout() {
       <>
          <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-               <Link className="navbar-brand" to="/">Employee Records</Link>
-               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span className="navbar-toggler-icon">
-                  </span>
-               </button>
+               <Tooltip title='Dashboard' placement="right">
+                  <Link className="navbar-brand" to="/">
+                     <DashboardCustomizeIcon/>
+                  </Link>
+               </Tooltip>
+               <div className="d-flex">
+                  <Tooltip title='Home'>
+                     <Link className="nav-link active me-3" to="/home">
+                        <HomeWorkIcon/>
+                     </Link>
+                  </Tooltip>
+                  
+                  <Tooltip title='Add Employee'>
+                     <Link className="nav-link active me-3" to="/add">
+                        <PersonAddAltRoundedIcon/>
+                     </Link>
+                  </Tooltip>
 
-               <div className="collapse navbar-collapse" id="navbarNav">
-                  <ul className="navbar-nav">
-                  <li className="nav-item">
-                     <Link className="nav-link active" to="/home">Home</Link>
-                  </li>
-
-                  <li className="nav-item">
-                     <Link className="nav-link active" to="/add">Add Employee</Link>
-                  </li>
-
-                  <li className="nav-item">
-                     <Link className="nav-link active" to="/signup">Register</Link>
-                  </li>
-
-                  </ul>
+                  <Tooltip title='Logout'>
+                     <Link className="nav-link active">
+                        <LogoutIcon/>
+                     </Link>
+                  </Tooltip>
                </div>
             </div>
          </nav>
@@ -40,4 +47,4 @@ function Layout() {
    )
 }
 
-export default Layout; 
+export default Layout;
