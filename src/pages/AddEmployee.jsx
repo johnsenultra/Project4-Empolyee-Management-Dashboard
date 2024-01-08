@@ -6,7 +6,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import firebaseApp from './firebaseConfig';
-import { getFirestore, collection, onSnapshot, setDoc, deleteDoc, doc, updateDoc, addDoc } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, addDoc } from "firebase/firestore";
+import Swal from 'sweetalert2'
+
 
 const defaultTheme = createTheme();
 
@@ -55,7 +57,12 @@ export default function AddEmployee() {
 
     if (employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.address === '' || employee.address === '' || employee.gender === '' || employee.contact === '' ||
       employee.jobtitle === '' || employee.hiredate === '') {
-      alert('Some input field are empty')
+        Swal.fire({
+          toast: true,
+          text: 'Some input fields are empty',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        })
     } else {
       setEmployeeList(
         employeeList => [
@@ -75,6 +82,14 @@ export default function AddEmployee() {
         jobtitle: "",
         hiredate: ""
       });
+
+      Swal.fire({
+        toast: 'true',
+        text: 'Added successfully',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000
+      })
     }
       
 
