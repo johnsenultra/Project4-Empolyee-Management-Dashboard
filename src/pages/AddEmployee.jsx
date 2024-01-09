@@ -58,10 +58,14 @@ export default function AddEmployee() {
     if (employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.address === '' || employee.address === '' || employee.gender === '' || employee.contact === '' ||
       employee.jobtitle === '' || employee.hiredate === '') {
         Swal.fire({
+          allowOutsideClick: true,
           toast: true,
           text: 'Some input fields are empty',
           icon: 'error',
           confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'btn btn-dark',
+          },
         })
     } else {
       setEmployeeList(

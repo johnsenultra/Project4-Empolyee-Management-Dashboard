@@ -6,11 +6,69 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import firebaseApp from '../firebaseConfig';
+import Swal from 'sweetalert2'
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
+  let navigate = useNavigate();
+
+  const handleSignup = () => {
+
+    if (lastname !== '' && firstname !== '' && email !== '' && password !== '' && confirmPassword !== '' && password === confirmPassword) {
+       
+      const auth = getAuth(firebaseApp);
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+          // Signed up 
+        const user = userCredential.user;
+
+        updateProfile(auth.currentUser, {
+          displayName: firstname + " " + lastname
+          });
+          Swal.fire({
+            toast: 'true',
+            text: 'Success',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        navigate("/login");
+
+      })
+       .catch((error) => {
+          Swal.fire({
+            toast: 'true',
+            text: error,
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'btn btn-dark',
+            },
+          })
+        });
+    }else{
+      Swal.fire({
+        toast: 'true',
+        text: 'Incorret or missing credentials!',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-dark',
+        },
+      })
+    }
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -25,7 +83,7 @@ export default function SignIn() {
           }}
         >
          <Typography className='fw-bold' component="h1" variant="h4">
-         Register
+         Signup
           </Typography>
          <p>Create your account here.</p>
          
@@ -33,14 +91,18 @@ export default function SignIn() {
          <div className="row ">
             <div className="col md-6">
                <TextField
-               margin="normal"
-               size='small'
-               required
-               fullWidth
-               id="firstname"
-               label="First Name"
-               name="firstname"
-               variant='filled'
+                margin="normal"
+                size='small'
+                required
+                fullWidth
+                id="firstname"
+                label="First Name"
+                name="firstname"
+                variant='outlined'
+                onChange={(e) => setFirstname(
+                  e.target.value,
+                )}
+                value={firstname}
                />
             </div>
 
@@ -53,7 +115,11 @@ export default function SignIn() {
                id=""lastname
                label="Last Name"
                name="=lastname"
-               variant='filled'
+               variant='outlined'
+               onChange={(e) => setLastname(
+                e.target.value,
+              )}
+              value={lastname}
                />
             </div>
          </div>
@@ -68,7 +134,11 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              variant='filled'
+              variant='outlined'
+              onChange={(e) => setEmail(
+                e.target.value,
+              )}
+              value={email}
             />
             <TextField
               margin="normal"
@@ -80,9 +150,30 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              variant='filled'
+              variant='outlined'
+              onChange={(e) => setPassword(
+                e.target.value,
+              )}
+              value={password}
             />
-            <Button type="submit" fullWidth variant="contained" 
+            <TextField
+              margin="normal"
+              size='small'
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              autoComplete="current-password"
+              variant='outlined'
+              onChange={(e) => setConfirmPassword(
+                e.target.value,
+              )}
+              value={confirmPassword}
+            />
+
+            <Button fullWidth variant="contained" onClick={() => handleSignup()}
               sx={{ 
                 mt: 3,
                 background: 'black',

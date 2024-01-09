@@ -37,8 +37,11 @@ export default function Login() {
         Swal.fire({
           toast: 'true',
           text: error,
-          icon: 'error',
+          icon: 'warning',
           confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'btn btn-dark',
+          },
         })
       });
     } else {
@@ -47,6 +50,9 @@ export default function Login() {
         text: 'Incorret or missing credentials!',
         icon: 'error',
         confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-dark',
+        },
       })
     }
   }
