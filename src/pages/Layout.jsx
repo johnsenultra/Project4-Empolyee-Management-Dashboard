@@ -7,6 +7,7 @@ import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
+import Swal from "sweetalert2";
 import { Container } from "@mui/material";
 import Typography from '@mui/material/Typography';
 
@@ -30,26 +31,46 @@ function Layout() {
 
    // Logout function
    const logout = () => {
-      const auth = getAuth(firebaseApp);
-      signOut(auth)
-      .then(() => {
-         setAuthenticated(false);
-         navigate("/login")
-      })
-      .catch((error) => {
-         //Handle error
-      })
-   }
+      // Display a confirmation alert using SweetAlert2
+      Swal.fire({
+      toast: true,
+      title: 'Logout',
+      text: 'Are you sure you want to log out?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel',
+      customClass: {
+         confirmButton: 'btn btn-danger', // You can customize the button style
+         cancelButton: 'btn btn-secondary', // You can customize the button style
+      },
+      }).then((result) => {
+         if (result.isConfirmed) {
+            // User clicked "Yes," proceed with logout
+            const auth = getAuth(firebaseApp);
+            signOut(auth)
+               .then(() => {
+               setAuthenticated(false);
+               navigate("/login");
+               })
+               .catch((error) => {
+               // Handle error
+               console.error('Error logging out: ', error);
+               });
+         } else {
+            // User clicked "Cancel," do nothing
+         }
+      });
+   };
+ 
    
    return (
       <section>
          {authenticated ? (
-
-         
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary ">
                <Container className="container">
-                  <Tooltip title='Dashboard' placement="right">
-                     <Link className="navbar-brand" yto="/">
+                  <Tooltip title='Dashboard' placement="bottom">
+                     <Link className="navbar-brand" to="/">
                         <DashboardCustomizeIcon/> 
                      </Link>
                   </Tooltip>
