@@ -90,8 +90,8 @@ function Layout() {
          <div className="container-fluid mt-5">
             <Outlet />
          </div>
-         <footer className="bg-dark pt-2 text-center text-white fixed-bottom mt-auto">
-            <p className="fw-medium">©️Developed by Johnsen Ultra</p>
+         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
+            <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
          </footer>
       </section>
    )
