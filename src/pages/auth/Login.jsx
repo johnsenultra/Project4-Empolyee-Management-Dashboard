@@ -70,7 +70,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-         <Typography className='fw-bold' component="h1" variant="h3">
+         <Typography className='fw-bold' component="h1" variant="h4">
          Login
          </Typography>
          <p>Enter your email and password to login.</p>
