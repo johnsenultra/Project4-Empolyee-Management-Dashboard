@@ -66,6 +66,7 @@ function Dashboard() {
 
       Swal.fire({
          toast: true,
+         title: 'Delete Employee',
          text: `Are you sure you want to delete ${firstname} ${lastname}?`,
          icon: 'warning',
          showCancelButton: true,
@@ -87,6 +88,7 @@ function Dashboard() {
             });
          } else {
             Swal.fire({
+               toast: true,
                text: 'Deletion canceled by the user',
                icon: 'info',
                confirmButtonText: 'OK',
