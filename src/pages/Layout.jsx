@@ -8,8 +8,9 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from "sweetalert2";
-import { Container } from "@mui/material";
+import { Container, rgbToHex } from "@mui/material";
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 
 function Layout() {
 
@@ -67,15 +68,14 @@ function Layout() {
    return (
       <section>
          {authenticated ? (
-            <nav className="navbar navbar-expand-lg bg-body-tertiary ">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{background: rgbToHex}}>
                <Container className="container">
-                  <Tooltip title='Dashboard' placement="bottom">
-                     <Link className="navbar-brand" to="/">
-                        <DashboardCustomizeIcon/> 
-                     </Link>
-                  </Tooltip>
-                  <Typography>Employee Management Dashboard</Typography>
-
+                     <Tooltip title='Dashboard' placement="bottom">
+                        <Link className="navbar-brand" to="/">
+                           <DashboardCustomizeIcon/> 
+                        </Link>
+                     </Tooltip>
+                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Employee Management Dashboard</Typography>
                   <div className="d-flex">
                      {authenticated ? (
                         <>
