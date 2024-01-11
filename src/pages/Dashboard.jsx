@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { getFirestore, collection, onSnapshot, getDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import firebaseApp from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -182,11 +182,11 @@ function Dashboard() {
          <ThemeProvider theme={defaultTheme}>
             <Container component="main" className="container-fluid">
                <h1 className="fw-bold">Employee List</h1>
-               <p>This is a list of employeed employee</p>
+               <p>This is a list of employed employee</p>
 
                <div className='table-responsive' style={{ overflowX: 'auto', maxHeight: '450px' }}>
                   <table className="table table-striped">
-                     <thead className='table-success' style={{position: 'sticky', top: '0', zIndex: '1'}}>
+                     <thead className='table-success' style={{position: 'sticky'}}>
                         <tr>
                            <th>First Name</th>
                            <th>Last Name</th>
@@ -248,6 +248,7 @@ function Dashboard() {
                                        sx={{
                                        }}
                                     >
+                                       
                                        <Typography id="modal-modal-title" variant="h4" sx={{fontWeight: 'bold'}}>
                                           Edit Employee Information
                                        </Typography>

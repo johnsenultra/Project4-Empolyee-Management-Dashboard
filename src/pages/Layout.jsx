@@ -77,7 +77,7 @@ function Layout() {
                      </Tooltip>
                      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Employee Management Dashboard</Typography>
                   <div className="d-flex">
-                     {authenticated ? (
+                     {/* {authenticated ? ( */}
                         <>
                            <Tooltip title='Home'>
                               <Link className="nav-link active me-3" to="/home">
@@ -97,11 +97,11 @@ function Layout() {
                               </Link>
                            </Tooltip>
                         </>
-                     ) : (
-                        <>
-                           <Link className="nav-link active" to="/login">Login</Link>
-                        </>
-                     )}
+                     {/* // ) : (
+                     //    <>
+                     //       <Link className="nav-link active" to="/login">Login</Link>
+                     //    </>
+                     // )} */}
 
                      </div>
                </Container>

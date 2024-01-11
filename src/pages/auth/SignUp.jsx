@@ -5,10 +5,12 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import Avatar from '@mui/material/Avatar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useEffect, useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
 import firebaseApp from '../firebaseConfig';
 import Swal from 'sweetalert2'
 
@@ -21,7 +23,23 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [authenticated, setAuthenticated] = useState(false);
+  const [userProperties, setUserProperties] = useState({});
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth(firebaseApp);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthenticated(true);
+        setUserProperties(user);
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  }, [])
 
   const handleSignup = () => {
 
@@ -34,33 +52,31 @@ export default function SignIn() {
         const user = userCredential.user;
 
         updateProfile(auth.currentUser, {
-          displayName: firstname + " " + lastname
           });
           Swal.fire({
             toast: 'true',
-            text: 'Success',
+            text: `Welcome, ${firstname} ${lastname}! Your account has been successfully created.`,
             icon: 'success',
             showConfirmButton: false,
-            timer: 2000
+            timer: 3300
           })
         navigate("/login");
 
-      })
-       .catch((error) => {
-          Swal.fire({
-            toast: 'true',
-            text: error,
-            icon: 'warning',
-            confirmButtonText: 'OK',
-            customClass: {
-              confirmButton: 'btn btn-dark',
-            },
-          })
-        });
-    }else{
+      }).catch((error) => {
+        Swal.fire({
+          toast: 'true',
+          text: error,
+          icon: 'warning',
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'btn btn-dark',
+          },
+        })
+      });
+    } else {
       Swal.fire({
         toast: 'true',
-        text: 'Incorret or missing credentials!',
+        text: 'Incorrect or missing credentials!',
         icon: 'error',
         confirmButtonText: 'OK',
         customClass: {
@@ -81,24 +97,29 @@ export default function SignIn() {
             flexDirection: 'column',
             alignItems: 'center',
           }}
-        >
-         <Typography className='fw-bold' component="h1" variant="h4">
-         Signup
+         >
+
+          <Avatar sx={{ m: 2, mt: 10, bgcolor: '#333333' }}>
+            <AddCircleOutlineRoundedIcon />
+          </Avatar>
+          
+          <Typography className='fw-bold' component="h1" variant="h4">
+            Sign up
           </Typography>
-         <p>Create your account here.</p>
-         
-         {/* Input field */}
-         <div className="row ">
+          <p>Create your account here.</p>
+          
+          {/* Input field */}
+          <div className="row ">
             <div className="col md-6">
                <TextField
-                margin="normal"
-                size='small'
+                margin = "normal"
+                size = 'small'
                 required
                 fullWidth
-                id="firstname"
-                label="First Name"
-                name="firstname"
-                variant='outlined'
+                id = "firstname"
+                label = "First Name"
+                name = "firstname"
+                variant = 'outlined'
                 onChange={(e) => setFirstname(
                   e.target.value,
                 )}
@@ -108,23 +129,23 @@ export default function SignIn() {
 
             <div className="col md-6">
               <TextField
-               margin="normal"
-               size='small'
-               required
-               fullWidth
-               id=""lastname
-               label="Last Name"
-               name="=lastname"
-               variant='outlined'
-               onChange={(e) => setLastname(
-                e.target.value,
+                margin = "normal"
+                size = 'small'
+                required
+                fullWidth
+                id = "lastname"
+                label = "Last Name"
+                name = "lastname"
+                variant='outlined'
+                onChange={(e) => setLastname(
+                  e.target.value,
               )}
               value={lastname}
                />
             </div>
-         </div>
+          </div>
 
-         <Box component="form"  noValidate sx={{ mt: 0 }}>
+          <Box component="form"  noValidate sx={{ mt: 0 }}>
             <TextField
               margin="normal"
               size='small'
@@ -186,11 +207,14 @@ export default function SignIn() {
             </Button>
             <Grid container justifyContent="center" sx={{ mt: 3 }}>
               <Grid item>
-                <span>Already have an account? <Link to='/login' variant="body2">Login here.</Link></span>
+                <span>Already had an account? <Link to='/login' variant="body2">Login here.</Link></span>
               </Grid>
             </Grid>
-         </Box>
+          </Box>
         </Box>
+        <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
+            <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
+         </footer>
       </Container>
     </ThemeProvider>
   );
