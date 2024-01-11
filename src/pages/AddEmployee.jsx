@@ -2,8 +2,10 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import { useEffect, useState } from 'react';
 import firebaseApp from './firebaseConfig';
 import { getFirestore, collection, onSnapshot, addDoc } from "firebase/firestore";
@@ -141,6 +143,11 @@ export default function AddEmployee() {
             alignItems: 'center',
             }}
           >
+
+          <Avatar sx={{ m: 2, bgcolor: '#333333' }}>
+            <PersonAddAltRoundedIcon />
+          </Avatar>
+
           <h2 className='fw-bold'>Add Employee</h2>
           
           {/* Input field */}
