@@ -105,7 +105,7 @@ function Layout() {
          <div className="container-fluid mt-5">
             <Outlet />
          </div>
-         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
+         <footer className="pb-3 text-center text-black fixed-bottom mt-auto">
             <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
          </footer>
       </section>
