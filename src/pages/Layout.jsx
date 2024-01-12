@@ -66,46 +66,40 @@ function Layout() {
  
    
    return (
-      <section>
+      <section >
          {authenticated ? (
-            <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{background: rgbToHex}}>
+            <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#333333', color: '#d3d3d3', }}>
                <Container className="container">
-                     <Tooltip title='Dashboard' placement="bottom">
-                        <Link className="navbar-brand" to="/">
-                           <DashboardCustomizeIcon/> 
-                        </Link>
-                     </Tooltip>
-                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Employee Management Dashboard</Typography>
+                  <Tooltip title='Dashboard' placement="bottom">
+                     <Link className="navbar-brand" style={{color: 'royalBlue'}} to="/">
+                        <DashboardCustomizeIcon/> 
+                     </Link>
+                  </Tooltip>
+                  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Employee Management Dashboard</Typography>
                   <div className="d-flex">
-                     {/* {authenticated ? ( */}
-                        <>
-                           <Tooltip title='Home'>
-                              <Link className="nav-link active me-3" to="/home">
-                                 <HomeWorkIcon/>
-                              </Link>
-                           </Tooltip>
-                           
-                           <Tooltip title='Add Employee'>
-                              <Link className="nav-link active me-3" to="/add">
-                                 <PersonAddAltRoundedIcon/>
-                              </Link>
-                           </Tooltip>
+                     <>
+                        <Tooltip title='Home'>
+                           <Link className="nav-link active me-3" to="/home">
+                              <HomeWorkIcon/>
+                           </Link>
+                        </Tooltip>
+                        
+                        <Tooltip title='Add Employee'>
+                           <Link className="nav-link active me-3" to="/add">
+                              <PersonAddAltRoundedIcon/>
+                           </Link>
+                        </Tooltip>
 
-                           <Tooltip title='Logout'>
-                              <Link className="nav-link active" onClick={logout}>
-                                 <LogoutIcon/>
-                              </Link>
-                           </Tooltip>
-                        </>
-                     {/* // ) : (
-                     //    <>
-                     //       <Link className="nav-link active" to="/login">Login</Link>
-                     //    </>
-                     // )} */}
-
-                     </div>
+                        <Tooltip title='Logout'>
+                           <Link className="nav-link active" onClick={logout}>
+                              <LogoutIcon/>
+                           </Link>
+                        </Tooltip>
+                     </>
+                  </div>
                </Container>
             </nav>
+            
          ) : null}
          
          <div className="container-fluid mt-5">

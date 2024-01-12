@@ -60,9 +60,9 @@ export default function AddEmployee() {
     if (employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.address === '' || employee.address === '' || employee.gender === '' || employee.contact === '' ||
       employee.jobtitle === '' || employee.hiredate === '') {
         Swal.fire({
-          allowOutsideClick: true,
           toast: true,
-          text: 'Some input fields are empty',
+          title: 'Incomplete',
+          text: 'Please fill in all the required fields!',
           icon: 'error',
           confirmButtonText: 'OK',
           customClass: {
@@ -91,7 +91,7 @@ export default function AddEmployee() {
 
       Swal.fire({
         toast: 'true',
-        text: 'Added successfully',
+        text: 'New employee added',
         icon: 'success',
         showConfirmButton: false,
         timer: 2000

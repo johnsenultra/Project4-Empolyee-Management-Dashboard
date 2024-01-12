@@ -49,7 +49,8 @@ export default function Login() {
     } else {
       Swal.fire({
         toast: 'true',
-        text: 'Incorret or missing credentials!',
+        title: 'Incomplete',
+        text: 'Please fill in all the required fields',
         icon: 'error',
         confirmButtonText: 'OK',
         customClass: {
