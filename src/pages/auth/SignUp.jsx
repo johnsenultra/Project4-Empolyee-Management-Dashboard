@@ -27,7 +27,10 @@ export default function SignIn() {
 
   const handleSignup = () => {
 
-    if (lastname !== '' && firstname !== '' && email !== '' && password !== '' && confirmPassword !== '' && password === confirmPassword) {
+    if (lastname !== '' && firstname !== '' && 
+    email !== '' && isValidEmail(email) && 
+    password !== '' && isValidPassword(password) && 
+    confirmPassword !== '' && password === confirmPassword) {
        
       const auth = getAuth(firebaseApp);
       createUserWithEmailAndPassword(auth, email, password)
@@ -58,18 +61,38 @@ export default function SignIn() {
         })
       });
     } else {
+      let errorMessage = 'Please fill in all the required fields!';
+      if (email !== '' && !isValidEmail(email)) {
+        errorMessage = 'Please enter a valid email address!';
+      }
+      if (password !== '' && !isValidPassword(password)) {
+        errorMessage = 'Please enter a valid password (at least 8 characters)!';
+      }
+
       Swal.fire({
         toast: 'true',
-        title: 'Incomplete',
-        text: 'Please fill in all the required fields!',
+        title: 'Incomplete or Invalid',
+        text: errorMessage,
         icon: 'error',
         confirmButtonText: 'OK',
         customClass: {
           confirmButton: 'btn btn-dark',
         },
-      })
+      });
     }
-  }
+  };
+
+  // Helper functions for email and password validation
+  const isValidEmail = (email) => {
+  // For a simple check, use a regular expression
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+  };
+
+  const isValidPassword = (password) => {
+  // For a simple check, ensure it's at least 6 characters
+  return password.length >= 8;
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
