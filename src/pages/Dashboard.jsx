@@ -185,7 +185,7 @@ function Dashboard() {
                <h1 className="fw-bold">Employee List,</h1>
                <p>This is a list of employed employee</p>
 
-               <div className='table-responsive' style={{ overflowX: 'auto', maxHeight: '480px' }}>
+               <div className='table-responsive' style={{ overflowX: 'auto', maxHeight: '490px' }}>
                   <table className="table table-striped">
                      <thead className='table-success fixed' style={{position: 'sticky', top: '0', zIndex: '1'}}>
                         <tr>
