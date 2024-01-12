@@ -23,23 +23,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [authenticated, setAuthenticated] = useState(false);
-  const [userProperties, setUserProperties] = useState({});
   let navigate = useNavigate();
-
-  useEffect(() => {
-    const auth = getAuth(firebaseApp);
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthenticated(true);
-        setUserProperties(user);
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
-  }, [])
 
   const handleSignup = () => {
 
@@ -58,7 +42,7 @@ export default function SignIn() {
             text: `Welcome, ${firstname} ${lastname}! Your account has been successfully created.`,
             icon: 'success',
             showConfirmButton: false,
-            timer: 3300
+            timer: 4000
           })
         navigate("/login");
 
@@ -76,7 +60,8 @@ export default function SignIn() {
     } else {
       Swal.fire({
         toast: 'true',
-        text: 'Incorrect or missing credentials!',
+        title: 'Incomplete',
+        text: 'Please fill in all the required fields!',
         icon: 'error',
         confirmButtonText: 'OK',
         customClass: {
@@ -99,7 +84,7 @@ export default function SignIn() {
           }}
          >
 
-          <Avatar sx={{ m: 2, mt: 10, bgcolor: '#333333' }}>
+          <Avatar sx={{ m: 2, mt: 10, bgcolor: '#333333',}}>
             <AddCircleOutlineRoundedIcon />
           </Avatar>
           
