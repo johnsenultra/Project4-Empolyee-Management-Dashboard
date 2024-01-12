@@ -66,8 +66,8 @@ function Dashboard() {
 
       Swal.fire({
          toast: true,
-         title: 'Delete Employee',
-         text: `Are you sure you want to delete ${firstname} ${lastname}?`,
+         title: 'Confirm Delete',
+         text: `Are you sure you want to delete the employee record for ${firstname} ${lastname}? This action cannot be undone.`,
          icon: 'warning',
          showCancelButton: true,
          confirmButtonText: 'Confirm',
@@ -89,10 +89,10 @@ function Dashboard() {
          } else {
             Swal.fire({
                toast: true,
-               text: 'Deletion canceled by the user',
+               text: 'Deletion cancelled. Your data is safe!',
                icon: 'info',
                showConfirmButton: false,
-               timer: 1800
+               timer: 2500
             })
          }
       });
@@ -141,12 +141,13 @@ function Dashboard() {
          // Check if any of the fields are empty or blank
          if (!selectedEmployee.firstname.trim() || !selectedEmployee.lastname.trim() || !selectedEmployee.email.trim() || 
          !selectedEmployee.address.trim() || !selectedEmployee.gender.trim() || selectedEmployee.jobtitle === '' ){
-            
+         handleClose(true);
 
             // alert('error')
             Swal.fire({
                toast: true,
-               text: 'Please fill in all fields before updating',
+               title: 'Incomplete Form',
+               text: 'Please fill in all fields before updating the employee information.',
                icon: 'warning',
                confirmButtonText: 'OK',
                customClass: {
@@ -181,12 +182,12 @@ function Dashboard() {
       return (
          <ThemeProvider theme={defaultTheme}>
             <Container component="main" className="container-fluid">
-               <h1 className="fw-bold">Employee List</h1>
+               <h1 className="fw-bold">Employee List,</h1>
                <p>This is a list of employed employee</p>
 
-               <div className='table-responsive' style={{ overflowX: 'auto', maxHeight: '450px' }}>
+               <div className='table-responsive' style={{ overflowX: 'auto', maxHeight: '480px' }}>
                   <table className="table table-striped">
-                     <thead className='table-success' style={{position: 'sticky'}}>
+                     <thead className='table-success fixed' style={{position: 'sticky', top: '0', zIndex: '1'}}>
                         <tr>
                            <th>First Name</th>
                            <th>Last Name</th>
@@ -204,9 +205,9 @@ function Dashboard() {
                               <td>{employeeRecord.jobtitle}</td>
                               <td>
                                  <Tooltip title='View' placement='left'>
-                                    <IconButton className="btn btn-secondary btn-sm"
-                                       onClick={() => handleInfoEmployee(employeeRecord.employee_id)}>
-                                       <Visibility color='info'/>
+                                    <IconButton style={{color: 'royalblue'}}
+                                       onClick={() => handleInfoEmployee(employeeRecord.employee_id)} >
+                                       <Visibility />
                                     </IconButton>
                                  </Tooltip>
                                  <Tooltip title='Delete' placement='right'>
