@@ -42,7 +42,7 @@ export default function SignIn() {
           });
           Swal.fire({
             toast: 'true',
-            text: `Welcome, ${firstname} ${lastname}! Your account has been successfully created.`,
+            text: `Hello, ${firstname} ${lastname}! Your account has been successfully created.`,
             icon: 'success',
             showConfirmButton: false,
             timer: 4000
