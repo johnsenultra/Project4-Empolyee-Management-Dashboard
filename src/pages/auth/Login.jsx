@@ -135,7 +135,7 @@ export default function Login() {
           </Box>
         </Box>
         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
-            <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
+          <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
          </footer>
       </Container>
     </ThemeProvider>

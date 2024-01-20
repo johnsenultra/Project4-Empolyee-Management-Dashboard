@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -309,6 +310,7 @@ export default function AddEmployee() {
                 }
               }}>
               Add Employee
+              <ArrowRightAltIcon/>
             </Button>
           </Box>
         </Box>

@@ -1,3 +1,4 @@
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -9,8 +10,10 @@ import Login from './pages/auth/Login.jsx';
 
 function App() {
 
+  const defaultTheme = createTheme({});
+
   return (
-    <>
+    <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Routes>
           {/* No need to wrap all routes in Layout */}
@@ -25,7 +28,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   )
 }
 

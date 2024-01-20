@@ -9,8 +9,8 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import Avatar from '@mui/material/Avatar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import firebaseApp from '../firebaseConfig';
 import Swal from 'sweetalert2'
 
