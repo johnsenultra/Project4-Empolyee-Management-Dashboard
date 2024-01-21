@@ -10,9 +10,14 @@ import Tooltip from '@mui/material/Tooltip';
 import Swal from "sweetalert2";
 import { Container } from "@mui/material";
 import Typography from '@mui/material/Typography';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
 
 function Layout() {
 
+   const defaultTheme = createTheme();
    const [authenticated, setAuthenticated] = useState(false);
    let navigate = useNavigate();
 
@@ -41,8 +46,8 @@ function Layout() {
       confirmButtonText: 'Yes',
       cancelButtonText: 'Cancel',
       customClass: {
-         confirmButton: 'btn btn-danger', // You can customize the button style
-         cancelButton: 'btn btn-secondary', // You can customize the button style
+         confirmButton: 'btn btn-danger',
+         cancelButton: 'btn btn-secondary',
       },
       }).then((result) => {
          if (result.isConfirmed) {
@@ -57,7 +62,7 @@ function Layout() {
                // Handle error
                console.error('Error logging out: ', error);
                });
-         } else {
+         }   else {
             // User clicked "Cancel," do nothing
          }
       });
@@ -65,7 +70,8 @@ function Layout() {
  
    
    return (
-      <section >
+      <ThemeProvider theme={defaultTheme}>
+         <CssBaseline />
          {authenticated ? (
             <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#333333', color: '#d3d3d3', }}>
                <Container className="container">
@@ -101,13 +107,13 @@ function Layout() {
             
          ) : null}
          
-         <div className="container-fluid mt-5">
+         <div className="container-fluid mt-4">
             <Outlet />
          </div>
          <footer className="pb-3 text-center text-black fixed-bottom mt-auto">
-            <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
+            <Typography className="fw-medium">©️ 2024 Johnsen Ultra. All rights reserved</Typography>
          </footer>
-      </section>
+      </ThemeProvider>
    )
 }
 

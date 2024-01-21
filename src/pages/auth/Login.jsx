@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -7,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import LoginIcon from '@mui/icons-material/Login';
 import Avatar from '@mui/material/Avatar';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -63,18 +65,21 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{mt: '50px'}}>
         <CssBaseline />
-        <Box
+        <Card
           sx={{
-            marginTop: -3,
+            boxShadow: 10,
+            mt: '20px',
+            borderRadius: 5,
+            p: '20px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
           >
           
-          <Avatar sx={{ m: 2, mt: 10, bgcolor: '#333333' }}>
+          <Avatar sx={{ m: 2, bgcolor: '#333333' }}>
             <LoginIcon />
           </Avatar>
 
@@ -125,7 +130,8 @@ export default function Login() {
                   background: 'purple'
                 }
               }}>
-              Sign In
+              Login
+              <ArrowRightAltIcon/ >
             </Button>
             <Grid container justifyContent="center" sx={{ mt: 3 }}>
               <Grid item>
@@ -133,9 +139,9 @@ export default function Login() {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Card>
         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
-          <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
+          <Typography>©️ 2024 Johnsen Ultra. All rights reserved</Typography>
          </footer>
       </Container>
     </ThemeProvider>

@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -66,7 +67,7 @@ export default function SignIn() {
         errorMessage = 'Please enter a valid email address!';
       }
       if (password !== '' && !isValidPassword(password)) {
-        errorMessage = 'Please enter a valid password (at least 8 characters)!';
+        errorMessage = 'Please enter a valid password (at least 10 characters)!';
       }
 
       Swal.fire({
@@ -91,23 +92,26 @@ export default function SignIn() {
 
   const isValidPassword = (password) => {
   // For a simple check, ensure it's at least 6 characters
-  return password.length >= 8;
+  return password.length >= 10;
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{mt: '50px'}}>
         <CssBaseline />
-        <Box
+        <Card
           sx={{
-            marginTop: -3,
+            boxShadow: 10,
+            mt: '20px',
+            borderRadius: 5,
+            p: '20px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
          >
 
-          <Avatar sx={{ m: 2, mt: 10, bgcolor: '#333333',}}>
+          <Avatar sx={{ m: 2, bgcolor: '#333333',}}>
             <AddCircleOutlineRoundedIcon />
           </Avatar>
           
@@ -219,9 +223,9 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Card>
         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
-            <Typography className="fw-medium">©️Developed by Johnsen Ultra</Typography>
+            <Typography className="fw-medium">©️ 2024 Johnsen Ultra. All rights reserved</Typography>
          </footer>
       </Container>
     </ThemeProvider>

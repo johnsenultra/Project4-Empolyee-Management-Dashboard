@@ -182,8 +182,8 @@ function Dashboard() {
       return (
          <ThemeProvider theme={defaultTheme}>
             <Container component="main" className="container-fluid">
-               <h1 className="fw-bold">Employee List</h1>
-               <p>This is a list of employed employee</p>
+               <h1 className='fw-bold fs-1'>Employee List</h1>
+               <p className='fw-medium fs-5'>This is a list of employed employee</p>
 
                <div className='table-responsive' style={{ overflowX: 'auto', maxHeight: '450px' }}>
                   <table className="table table-striped">
