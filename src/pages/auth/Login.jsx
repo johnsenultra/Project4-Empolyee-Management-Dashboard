@@ -142,7 +142,7 @@ export default function Login() {
         </Card>
         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
           <Typography>©️ 2024 Johnsen Ultra. All rights reserved</Typography>
-         </footer>
+        </footer>
       </Container>
     </ThemeProvider>
   );

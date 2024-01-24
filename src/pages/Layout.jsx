@@ -110,7 +110,7 @@ function Layout() {
          <div className="container-fluid mt-4">
             <Outlet />
          </div>
-         <footer className="pb-3 text-center text-black fixed-bottom mt-auto">
+         <footer className="pb-4 text-center text-black fixed-bottom mt-auto">
             <Typography className="fw-medium">©️ 2024 Johnsen Ultra. All rights reserved</Typography>
          </footer>
       </ThemeProvider>
